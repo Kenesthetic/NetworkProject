@@ -25,7 +25,7 @@ class Application(tk.Frame):
         self.reply.grid(row=3, column=2)
 
 
-        #quit button to exit the application
+        #Quit button to exit the application
         self.quitButton = tk.Button(self, text="Quit", command=self.quit)
         self.quitButton.grid(row=9, column=2)
         self.quitButton.anchor
