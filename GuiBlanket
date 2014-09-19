@@ -1,0 +1,37 @@
+import tkinter as tk
+
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        tk.Frame.__init__(self, master,)
+        self.grid(columnspan=10, rowspan=10)
+        self.createWidgets()
+
+    def createWidgets(self):
+        #Top Label Identifier
+        self.topInput = tk.Label(self, text="Welcome to the App",)
+        self.topInput.grid(row=0, column=2)
+
+        #Instructional Label
+        self.instruct = tk.Label(self, text="Please enter the IP address to Query")
+        self.instruct.grid(row=1, column=2)
+
+        #Text Entry
+        self.enter =tk.Entry(self,)
+        self.enter.grid(row=2, column=2)
+
+        #Text Reply to User
+        self.reply = tk.Label(self, text="Information will be returned here",  )
+        self.reply.grid(row=3, column=2)
+
+
+        #quit button to exit the application
+        self.quitButton = tk.Button(self, text="Quit", command=self.quit)
+        self.quitButton.grid(row=9, column=2)
+        self.quitButton.anchor
+
+
+
+app = Application()
+app.master.title('Starting the GUI')
+app.mainloop()
