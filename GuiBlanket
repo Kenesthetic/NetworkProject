@@ -34,26 +34,27 @@ class Application(tk.Frame):
     def createWidgets(self):
         #Top Label Identifier
         self.topInput = tk.Label(self, text="Welcome to the App",)
-        self.topInput.grid(row=0, column=2)
+        self.topInput.place(x=275, y=0)
 
         #Instructional Label
         self.instruct = tk.Label(self, text="Please enter the IP address to Query")
-        self.instruct.grid(row=1, column=2)
-        self.instruct.columnconfigure(1, weight=2)
-        self.instruct.rowconfigure(2, weight=2)
-
+        self.instruct.place(x=250, y=25)
         #Text Entry
         self.enter =tk.Entry(self,)
-        self.enter.grid(row=2, column=2)
+        self.enter.place(x=280, y=50)
 
         #Text Reply to User
-        self.reply = tk.Label(self, text="Information will be returned here",  )
-        self.reply.grid(row=3, column=2)
+        self.reply = tk.Label(self, text="Console Echo will be returned here",  )
+        self.reply.place(x=80, y=100)
+
+        #Text Return Info to User
+        self.useful = tk.Label(self, text='Useful Information will return here')
+        self.useful.place(x=380, y=100)
 
 
         #quit button to exit the application
         self.quitButton = tk.Button(self, text="Quit", command=self.quit)
-        self.quitButton.grid(row=9, column=2)
+        self.quitButton.place(x=650, y=670)
         self.quitButton.anchor=tk.BOTTOM
 
 root = Tk()
