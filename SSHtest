@@ -1,0 +1,27 @@
+import pxssh
+import getpass
+import sys
+#heads up pxssh uses pexpact classes so it might not work on windows
+#unless you have cygwin installed, trying looking into other variations
+
+try:
+    s=pxssh.pxssh()
+    hostname ='192.168.0.106'
+    username='py'
+    password='python'
+    s.login(hostname,username,password)
+    #sending commane to enable console reply with outcome
+    s.sendline('en')
+    s.prompt()
+    password=getpass.getpass('password:')
+    #sending command to get show run
+    s.sendline('sh run')
+    s.prompt()
+    print s.before
+    s.logout()
+except pxssh.ExceptionPxssh,e:
+    print "pxssh failed on login"
+    print str(e)
+
+
+
