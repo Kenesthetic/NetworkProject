@@ -1,5 +1,9 @@
 from tkinter import *
 import tkinter as tk
+import time
+import subprocess
+import sys
+import logging
 
 
 
@@ -9,6 +13,7 @@ class Application(tk.Frame):
         self.master = master
         self.init_window()
         self.createWidgets()
+
 
     def init_window(self):
         self.master.title("GUI")
@@ -24,11 +29,10 @@ class Application(tk.Frame):
         edit.add_command(label='Show Text', command=self.showTxt)
         menu.add_cascade(label='Edit', menu=edit)
 
-
-
     def showTxt(self):
         text = Label(self, text='Hey, This is a test to see if the drop down menu is working')
         text.place(x=250,y=200)
+
 
 
     def createWidgets(self):
@@ -56,6 +60,21 @@ class Application(tk.Frame):
         self.quitButton = tk.Button(self, text="Quit", command=self.quit)
         self.quitButton.place(x=650, y=670)
         self.quitButton.anchor=tk.BOTTOM
+
+        #Button for IP input
+        self.accept = tk.Button(self, text='Accept', command=self.action)
+        self.accept.place(x=425, y=45)
+
+        #Label to Contain Console Printout
+        self.console = tk.Label(self, text='I Want Console Output Here')
+        self.console.place(x=80, y=150)
+
+
+    def action(self):
+        request = self.enter.get()
+        subprocess.call(['ping', request ])
+        print(request)
+
 
 root = Tk()
 root.geometry("700x700")
