@@ -1,0 +1,52 @@
+__author__ = 'jadams'
+
+import paramiko
+
+#Globals
+info = []
+X = ('')
+
+#SSH CONNECTION
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect('95.89.31.236', username='python', password='python')
+stdin , stdout , stderr = ssh.exec_command("show ip int bri")
+for line in stdout:
+    X = (line.strip())
+    info.append(X)
+
+FE0 = (info[-9])
+FE1 = (info[-8])
+FE4 = (info[-5])
+
+def upDown():
+    if 'up' in FE0 and 'down' in FE0:
+        print 'FastEthernet0 is Down!'
+
+    else:
+        print "FastEthernet0 is Up"
+
+    if 'up' not in FE0:
+        print "CHECK THE PORT!!"
+
+    if 'up' in FE1 and 'down' in FE1:
+        print 'FastEthernet0 is Down!'
+
+    else:
+        print "FastEthernet0 is Up"
+
+    if 'up' not in FE1:
+        print "CHECK THE PORT!!"
+
+
+    if 'up' in FE4 and 'down' in FE4:
+        print 'FastEthernet0 is Down!'
+
+    else:
+        print "FastEthernet0 is Up"
+
+    if 'up' not in FE4:
+        print "CHECK THE PORT!!"
+
+upDown()
+ssh.close()
