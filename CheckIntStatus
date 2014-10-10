@@ -14,10 +14,17 @@ stdin , stdout , stderr = ssh.exec_command("show ip int bri")
 for line in stdout:
     X = (line.strip())
     info.append(X)
+    #print(X)
 
 FE0 = (info[-9])
 FE1 = (info[-8])
+FE2 = (info[-7])
+FE3 = (info[-6])
 FE4 = (info[-5])
+Lo1 = (info[-4])
+Lo2 = (info[-3])
+NVIO = (info[-2])
+Vlan1 = (info[-1])
 
 def upDown():
     if 'up' in FE0 and 'down' in FE0:
@@ -27,26 +34,61 @@ def upDown():
         print "FastEthernet0 is Up"
 
     if 'up' not in FE0:
-        print "CHECK THE PORT!!"
+        print "CHECK THE FE0 PORT!!"
 
     if 'up' in FE1 and 'down' in FE1:
-        print 'FastEthernet0 is Down!'
+        print 'FastEthernet1 is Down!'
 
     else:
-        print "FastEthernet0 is Up"
+        print "FastEthernet1 is Up"
 
     if 'up' not in FE1:
-        print "CHECK THE PORT!!"
+        print "CHECK THE FE1 PORT!!"
 
-
-    if 'up' in FE4 and 'down' in FE4:
-        print 'FastEthernet0 is Down!'
+    if 'up' in FE2 and 'down' in FE2:
+        print 'FastEthernet2 is Down!'
 
     else:
-        print "FastEthernet0 is Up"
+        print "FastEthernet2 is Up"
+
+    if 'up' not in FE2:
+        print "CHECK THE FE2 PORT!!"
+
+    if 'up' in FE3 and 'down' in FE3:
+        print 'FastEthernet3 is Down!'
+
+    else:
+        print "FastEthernet3 is Up"
+
+    if 'up' not in FE3:
+        print "CHECK THE FE3 PORT!!"
+
+    if 'up' in FE4 and 'down' in FE4:
+        print 'FastEthernet4 is Down!'
+
+    else:
+        print "FastEthernet4 is Up"
 
     if 'up' not in FE4:
-        print "CHECK THE PORT!!"
+        print "CHECK THE FE4 PORT!!"
+
+    if 'up' in Lo1 and 'down' in Lo1:
+        print 'LoopBack1 is Down!'
+
+    else:
+        print "LoopBack1 is Up"
+
+    if 'up' not in Lo1:
+        print "CHECK Lo1!!"
+
+    if 'up' in Lo2 and 'down' in Lo2:
+        print 'LoopBack2 is Down!'
+
+    else:
+        print "LoopBack2 is Up"
+
+    if 'up' not in Lo2:
+        print "CHECK Lo2!!"
 
 upDown()
 ssh.close()
