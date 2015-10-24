@@ -1,0 +1,73 @@
+#for telneting from course with few adjustments to raw input instead of having to enter in IP here in code..
+
+# Have created seperate file for commands to be sent to router that this code reads from.... The file is called:
+# tnt_cmd.txt
+# 
+#txt file data will be added in comments section.. (tho any commands can be entered into the txt file)
+
+
+#Open telnet connection to devices
+def open_telnet_conn(ip):
+    #Change exception message
+    try:
+        #Define telnet parameters
+        username = 'teopy'
+        password = 'python'
+        telnet_port = 23
+        telnet_timeout = 5
+        reading_timeout = 5
+        
+        #This is where the txt file will be entered for teh code to read from
+        cmd_file = raw_input("Enter the file name that holds the commands here, to be passed to router: ")
+        
+        #Logging into device
+        connection = telnetlib.Telnet(ip, telnet_port, telnet_timeout)
+        
+        #Waiting for the username prompt and sending the username
+        output = connection.read_until("name:", reading_timeout)
+        connection.write(username + "\n")
+        
+        #Waiting for the password prompt and sending the password
+        output = connection.read_until("word:", reading_timeout)
+        connection.write(password + "\n")
+        time.sleep(1)
+        
+        #Setting terminal length for entire output - no pagination
+        connection.write("terminal length 0\n")
+        time.sleep(1)
+        
+        #Entering global config mode
+        connection.write("\n")
+        connection.write("configure terminal\n")
+        time.sleep(1)
+        
+        #Open user selected file for reading
+        selected_cmd_file = open(cmd_file, 'r')
+        
+        #Starting from the beginning of the file
+        selected_cmd_file.seek(0)
+        
+        #Writing each line in the file to the device
+        for each_line in selected_cmd_file.readlines():
+            connection.write(each_line + '\n')
+            time.sleep(1)
+            
+        #Closing the file
+        selected_cmd_file.close()
+        
+        #Test for reading command output
+        output = connection.read_very_eager()
+        print output
+        
+        #Closing the connection
+        connection.close()
+        
+    #The custom exception error message for "try" from beginning of code in case any errors appear    
+    except IOError:
+        print "Input parameter error! Please check username, password and file name."
+        
+        
+#Calling the Telnet function, this is outside of the function above and will call the function above and execute
+#Adding raw input here so IP addresses can be changed on teh fly instead of having to do it inside of the code
+open_telnet_conn(raw_input("Enter in IP Address of Host/Router you want to connect to: "))
+
