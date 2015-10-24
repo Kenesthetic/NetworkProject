@@ -11,7 +11,7 @@ def open_telnet_conn(ip):
     #Change exception message
     try:
         #Define telnet parameters
-        username = 'teopy'
+        username = 'blasen'
         password = 'python'
         telnet_port = 23
         telnet_timeout = 5
