@@ -6,24 +6,28 @@ import paramiko
 info = []
 X = ('')
 
-class 
+class automation:
 #CSV Creation
-csv = open('tyler.csv', 'r')
-csvRead = csv.read()
-tylersUpdate = csvRead.splitlines(',')
-tylersList = ['ip','username','password','command','md5Hash']
+    def creation(self):
+    self.csv = open('tyler.csv', 'r')
+    self.csvRead = csv.read()
+    self.tylersUpdate = csvRead.splitlines(',')
+    self.tylersList = ['ip','username','password','command','md5Hash']
+    self.ty = self.tylersList
 
 
 #SSH CONNECTION
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(ip, username=, password='python')
-stdin , stdout , stderr = ssh.exec_command("show ip int bri")
-for line in stdout:
-    X = (line.strip())
-    info.append(X)
-    #print(X)
+    def Connection(self):
+        self.ssh = paramiko.SSHClient()
+        self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        self.ssh.connect(creation.ty[0], username=creation.ty[1], password=creation.ty[2])
+        stdin , stdout , stderr = ssh.exec_command()
+        for line in stdout:
+            X = (line.strip())
+            info.append(X)
+            print(X)
 
 
-upDown()
+automation.creation()
+automation.connection()
 ssh.close()
