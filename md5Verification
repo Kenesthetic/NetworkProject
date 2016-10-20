@@ -2,10 +2,6 @@ __author__ = 'jadams'
 
 import paramiko
 
-#Globals
-info = []
-X = ('')
-
 class automation(object):
 
     def __init__(self):
@@ -24,6 +20,8 @@ class automation(object):
 
 #SSH CONNECTION
     def connection(self):
+        self.X = ('')
+        self.info[]
         print('Opening SSH Connection to tyler.csv Definitions...')
         self.ssh = paramiko.SSHClient()
         self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -31,8 +29,8 @@ class automation(object):
         print('Executing Command')
         stdin , stdout , stderr = ssh.exec_command()
         for line in stdout:
-            X = (line.strip())
-            info.append(X)
+            self.X = (line.strip())
+            self.info.append(X)
             print(X)
         print('Completed!') 
         print('Closing Connection')
