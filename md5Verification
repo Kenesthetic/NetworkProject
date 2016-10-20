@@ -7,35 +7,40 @@ class automation(object):
     def __init__(self):
             print('Welcome. Lets Automate! \nWe will now start tasks...')
 
+class auto(object):
+
+        def __init__(self):
+                print('Welcome. Lets Automate! \nWe will now start tasks...')
+
 #CSV Creation
-    def creation(self):
-        print('opening tyler.csv...')
-        self.csv = open('tyler.csv', 'r')
-        self.csvRead = csv.read()
-        self.tylersUpdate = csvRead.splitlines(',')
-        self.tylersList = ['ip','username','password','command','md5Hash']
-        self.ty = self.tylersList
-        print('Completed')
+        def creation(self):
+                print('opening tyler.csv...')
+                self.csv = open('tyler.csv', 'rb')
+                self.csvRead = csv.reader(self.csv, delimiter=',')
+                self.tylersList = list(self.csvRead)
+                print(self.tylersList)
+                print(type(tylersList)
+                print('Completed')
 
 
 #SSH CONNECTION
-    def connection(self):
-        self.X = ('')
-        self.info[]
-        print('Opening SSH Connection to tyler.csv Definitions...')
-        self.ssh = paramiko.SSHClient()
-        self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.ssh.connect(creation.ty[0], username=creation.ty[1], password=creation.ty[2])
-        print('Executing Command')
-        stdin , stdout , stderr = ssh.exec_command()
-        for line in stdout:
-            self.X = (line.strip())
-            self.info.append(X)
-            print(X)
-        print('Completed!') 
-        print('Closing Connection')
-        self.ssh.close()
-        print('Enjoy your day')
+        def connection(self):
+            self.X = ('')
+            self.info[]
+            print('Opening SSH Connection to tyler.csv Definitions...')
+            self.ssh = paramiko.SSHClient()
+            self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            self.ssh.connect(creation.ty[0], username=creation.ty[1], password=creation.ty[2])
+            print('Executing Command')
+            stdin , stdout , stderr = ssh.exec_command()
+            for line in stdout:
+                self.X = (line.strip())
+                self.info.append(X)
+                print(X)
+            print('Completed!') 
+            print('Closing Connection')
+            self.ssh.close()
+            print('Enjoy your day')
 
 
 
