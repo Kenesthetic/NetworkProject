@@ -8,17 +8,26 @@ import codecs
 import collections
 import csv
 from nltk.compat import raw_input
+import shutil
+import cgi
+##from pythonFunction import function
+##from tyler.py import funtion(creation, connection)
 
+
+
+class KnowledgeBaseArticles(object):
+    def __init__(self):
+        self.KnowledgeBasic = {'kb0':'This Knowledge Base Article verifies if ConfD process has died.  Technician'
+                               'will need to access root and fsck all partitions', 'processWatch':'Process Watch has'
+                               'found dead processes.'}
 
 class crunchText(object):
     fileDef = 'none'
 
     def __init__(self):
-        self.file = raw_input()
-        print('Welcome to KnowledgeBasic! \nWe will now analyze bootlog...')
-
-    def prompt(self):
-
+        self.accountDir = '/'
+        self.uploadDir = self.accountDir
+        print('Welcome to KnowledgeBasic! \nPlease Press Enter to Proceed...')
 
     def processWatch(self):
         print('Check File for Process Death')
@@ -49,6 +58,7 @@ class crunchText(object):
     def kb0(self):
         print('Check File against KnowlegeBasic')
         print('Please Input Filename')
+        self.file = raw_input()
         self.log = open(self.file, 'r')
         self.logRaw = self.log.read()
         self.logs = self.logRaw.splitlines()
@@ -73,6 +83,45 @@ class crunchText(object):
             wr.writerows(self.results)
 
 
+    def upload(self):
+        print('Upload Log file to KnowledgeBasic Server')
+        print('Please Print File Name')
+        self.file = raw_input()
+        print('Please Print Directory Path')
+        self.uploadDir = raw_input()
+        self.uploadFile= self.uploadFile(self.file, self.uploadDir)
+        self.form = cgi.FieldStorage()
+        if not self.form.has_key(self.file):
+            return
+        self.fileitem = self.form[self.file]
+        if not self.fileitem.file:
+            return
+        self.outpath = os.path.join(self.uploadDir, self.fileitem.filename)
+        with open(self.outpath, 'wb') as fout:
+            shutil.copyfileobj(self.fileitem.file, fout, 100000)
+
+    def define(self):
+        print('Define New Knowledge Basic Article')
+
+
+    def prompt(self):
+        print('Menu:  u = Upload  a = Analyze d = Define')
+        self.option = raw_input()
+        while self.option != 'q':
+            if self.option == 'a':
+                self.kb0()
+                print('Completed... Heading back to menu')
+            elif self.option == 'u':
+                self.upload()
+            elif self.option == 'd':
+                self.define()
+
+
+
+##    print('Testing Reach Into alternate.py file')
+##    print(creation())
+
 ct = crunchText()
-ct.processWatch()
-ct.kb0()
+a=1
+while a == a :
+    ct.prompt()
